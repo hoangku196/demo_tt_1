@@ -1,19 +1,18 @@
 import 'package:equatable/equatable.dart';
+import 'package:meta/meta.dart';
 
-abstract class SearchEvent extends Equatable {
-  const SearchEvent();
-}
+abstract class SearchEvent {}
 
-class SearchUnitToggled extends SearchEvent {
+class ClearSearchEvent extends SearchEvent{}
+
+class SearchAlbumIdEvent extends SearchEvent {
   final String value;
 
-  const SearchUnitToggled({this.value});
-
-  @override
-  List<Object> get props => [];
+  SearchAlbumIdEvent({@required this.value});
 }
 
-class SearchIconClicked extends SearchEvent {
-  @override
-  List<Object> get props => [];
+class LoadMoreEvent extends SearchEvent {
+  final String currentValue;
+
+  LoadMoreEvent({@required this.currentValue});
 }

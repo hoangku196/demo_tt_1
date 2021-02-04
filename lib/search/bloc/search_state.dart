@@ -1,30 +1,30 @@
-import 'package:equatable/equatable.dart';
+import 'package:meta/meta.dart';
 
-abstract class SearchState extends Equatable {
-  const SearchState();
+import 'package:demo_app/models/models.dart';
 
-  @override
-  List<Object> get props => [];
+abstract class SearchState {}
+
+class PhotoUninitializedState extends SearchState {}
+
+class PhotoFetchingState extends SearchState {}
+
+class PhotoFetchedState extends SearchState {
+  final List<Photo> photos;
+  final bool hasReachedMax;
+
+  PhotoFetchedState({this.photos, this.hasReachedMax});
+
+  PhotoFetchedState copyWith({
+    List<Photo> photo,
+    bool hasReachedMax,
+  }) {
+    return PhotoFetchedState(
+      photos: photos ?? this.photos,
+      hasReachedMax: hasReachedMax ?? this.hasReachedMax,
+    );
+  }
 }
 
-class SearchInitial extends SearchState {
-  final List<String> result;
+class PhotoErrorState extends SearchState {}
 
-  const SearchInitial({this.result});
-
-  @override
-  List<Object> get props => [result];
-}
-
-class SearchInProgress extends SearchState {}
-
-class SearchSuccess extends SearchState {
-  final List<String> result;
-
-  const SearchSuccess({this.result});
-
-  @override
-  List<Object> get props => [result];
-}
-
-class SearchFailure extends SearchState {}
+class PhotoEmptyState extends SearchState {}

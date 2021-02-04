@@ -14,7 +14,6 @@ class MainSlideShow extends StatelessWidget {
         return widgets[index];
       },
       autoplay: true,
-      pagination: SwiperPagination(),
     );
   }
 }
