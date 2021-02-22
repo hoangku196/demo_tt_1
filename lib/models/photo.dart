@@ -1,8 +1,4 @@
-import 'dart:convert';
-
-import 'package:equatable/equatable.dart';
-
-class Photo{
+class Photo {
   final int albumId;
   final int id;
   final String title;

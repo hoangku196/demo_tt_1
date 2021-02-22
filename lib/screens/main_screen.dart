@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/painting.dart';
 import 'package:demo_app/widgets/widgets.dart';
-import 'package:demo_app/repositories/repositories.dart';
 
 class Item {
   String image, des;
@@ -74,7 +73,7 @@ class HotItem extends StatelessWidget {
                   CardItem(
                     urlImage:
                         'https://cf.shopee.vn/file/2254a3d75fdc75522e3d16081cededbd_tn',
-                    name: 'Mỹ phẩm',
+                    name: 'Mỹ phẩm hạng a a a a ',
                     price: '100.000 đ',
                   ),
                   CardItem(
@@ -414,7 +413,77 @@ class Page1 extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            MainAppBar(),
+            Container(
+              height: 100,
+              child: Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(80),
+                      bottomRight: Radius.circular(80),
+                    ),
+                    child: Container(
+                      height: 50,
+                      color: Colors.deepPurpleAccent,
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                      child: Container(
+                        width: 300,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: Colors.orange,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.search),
+                                  Text('Nạp tiền'),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.search),
+                                  Text('Nạp tiền'),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.search),
+                                  Text('Nạp tiền'),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.search),
+                                  Text('Nạp tiền'),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             Slide(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -487,6 +556,19 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     print('build');
     return Scaffold(
+      appBar: MainAppBar(
+        height: MediaQuery.of(context).size.height * 0.4,
+        icons: [
+          Icon(
+            Icons.search,
+            size: 30.0,
+          ),
+          Icon(
+            Icons.search,
+            size: 30.0,
+          ),
+        ],
+      ),
       body: IndexedStack(
         children: pages,
         index: currentPage,

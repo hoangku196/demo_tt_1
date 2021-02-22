@@ -13,6 +13,7 @@ void main() {
   Bloc.observer = ProjectObserver();
   runApp(
     MaterialApp(
+      debugShowCheckedModeBanner: false,
       initialRoute: MainScreen.route,
       routes: {
         MainScreen.route: (context) => MainScreen(),

@@ -1,6 +1,7 @@
 import 'package:demo_app/models/models.dart';
 import 'package:demo_app/repositories/photo_repository.dart';
 import 'package:demo_app/search/bloc/blocs.dart';
+import 'package:demo_app/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,54 +43,64 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        automaticallyImplyLeading: false,
-        title: Container(
-          height: MediaQuery.of(context).size.height * 0.25 * 0.5,
-          child: TextFormField(
-            controller: _textEditController,
-            autofocus: true,
-            maxLines: 1,
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.black,
-            ),
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.grey.withOpacity(0.2),
-              prefixIcon: Icon(
-                Icons.search,
-                color: Colors.grey,
-              ),
-              hintText: 'Nhập từ khóa tìm kiếm',
-              suffixIcon: Icon(Icons.search),
-              hintStyle: TextStyle(
-                color: Colors.grey,
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-                borderSide: BorderSide.none,
-              ),
-            ),
-            onChanged: (value) {
-              if (value.length == 0) {
-                BlocProvider.of<SearchBloc>(context).add(ClearSearchEvent());
-              } else {
-                BlocProvider.of<SearchBloc>(context)
-                    .add(SearchAlbumIdEvent(value: value));
-              }
-            },
-          ),
-        ),
-        actions: [
-          Center(
-            child: Text(
-              'Hủy',
-              style: TextStyle(
-                color: Colors.blue,
-              ),
-            ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.white,
+      //   automaticallyImplyLeading: false,
+      //   title: Container(
+      //     height: MediaQuery.of(context).size.height * 0.25 * 0.5,
+      //     child: TextFormField(
+      //       controller: _textEditController,
+      //       autofocus: true,
+      //       maxLines: 1,
+      //       style: TextStyle(
+      //         fontSize: 18,
+      //         color: Colors.black,
+      //       ),
+      //       decoration: InputDecoration(
+      //         filled: true,
+      //         fillColor: Colors.grey.withOpacity(0.2),
+      //         prefixIcon: Icon(
+      //           Icons.search,
+      //           color: Colors.grey,
+      //         ),
+      //         hintText: 'Nhập từ khóa tìm kiếm',
+      //         suffixIcon: Icon(Icons.search),
+      //         hintStyle: TextStyle(
+      //           color: Colors.grey,
+      //         ),
+      //         border: OutlineInputBorder(
+      //           borderRadius: BorderRadius.circular(5),
+      //           borderSide: BorderSide.none,
+      //         ),
+      //       ),
+      //       onChanged: (value) {
+      //         if (value.length == 0) {
+      //           BlocProvider.of<SearchBloc>(context).add(ClearSearchEvent());
+      //         } else {
+      //           BlocProvider.of<SearchBloc>(context)
+      //               .add(SearchAlbumIdEvent(value: value));
+      //         }
+      //       },
+      //     ),
+      //   ),
+      //   actions: [
+      //     Center(
+      //       child: Text(
+      //         'Hủy',
+      //         style: TextStyle(
+      //           color: Colors.blue,
+      //         ),
+      //       ),
+      //     ),
+      //   ],
+      // ),
+
+      appBar: MainAppBar(
+        height: MediaQuery.of(context).size.height * 0.4,
+        icons: [
+          Icon(
+            Icons.arrow_back,
+            size: 30,
           ),
         ],
       ),
