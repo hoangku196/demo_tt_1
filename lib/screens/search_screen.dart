@@ -1,5 +1,4 @@
 import 'package:demo_app/models/models.dart';
-import 'package:demo_app/repositories/photo_repository.dart';
 import 'package:demo_app/search/bloc/blocs.dart';
 import 'package:demo_app/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';

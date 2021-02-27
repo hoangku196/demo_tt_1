@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class CardItem extends StatelessWidget {
+  final String urlImage, name;
+  final double price;
 
-  final String urlImage, name, price;
+  final bool haveImage;
 
-  const CardItem({this.urlImage, this.name, this.price});
+  const CardItem({this.urlImage, this.name, this.price, this.haveImage});
+
+  String formatPrice(double price) {
+    var formatCurrency =
+        NumberFormat.simpleCurrency(locale: 'en_US', decimalDigits: 0);
+    String format = formatCurrency.format(price);
+    return format.substring(1, format.length) + '  đ';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,17 +25,45 @@ class CardItem extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(5),
           child: Container(
-            width: MediaQuery.of(context).size.width * 0.3,
-            height:
-            MediaQuery.of(context).size.height * 0.4 * 0.8 -
-                8,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Image.network(
-                  urlImage,
-                ),
+                FutureBuilder(
+                    future: http.get(urlImage),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Container(
+                          height: 150,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              onError: (exception, stackTrace) =>
+                                  print('Lỗi không có ảnh'),
+                              image: NetworkImage(
+                                urlImage,
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        );
+                      } else if (snapshot.hasError)
+                        return Container(
+                          width: 200,
+                          height: 200,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage('images/user_icon.png'),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        );
+                      else
+                        return SizedBox(
+                          width: 30,
+                          height: 30,
+                          child: CircularProgressIndicator(),
+                        );
+                    }),
                 Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: 5,
@@ -40,7 +79,7 @@ class CardItem extends StatelessWidget {
                     horizontal: 5,
                   ),
                   child: Text(
-                    price,
+                    formatPrice(price),
                     style: TextStyle(
                       color: Colors.red,
                     ),
@@ -51,8 +90,7 @@ class CardItem extends StatelessWidget {
                     horizontal: 5,
                   ),
                   child: Row(
-                    mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
                         children: [

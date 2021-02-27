@@ -1,401 +1,9 @@
+import 'package:demo_app/bloc/bloc.dart';
 import 'package:demo_app/screens/screens.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/painting.dart';
 import 'package:demo_app/widgets/widgets.dart';
-
-class Item {
-  String image, des;
-
-  Item({this.image, this.des});
-}
-
-class Slide extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(10),
-      child: Container(
-        height: MediaQuery.of(context).size.height * 0.2,
-        child: MainSlideShow(
-          widgets: [
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.red,
-                borderRadius: BorderRadius.circular(5),
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.green,
-                borderRadius: BorderRadius.circular(5),
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.pink,
-                borderRadius: BorderRadius.circular(5),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class HotItem extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.4,
-      color: Colors.orange,
-      child: Padding(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          children: [
-            Container(
-              alignment: Alignment.topLeft,
-              height: MediaQuery.of(context).size.height * 0.4 * 0.2 - 20,
-              child: Text(
-                'Sản Phẩm Hot',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  CardItem(
-                    urlImage:
-                        'https://cf.shopee.vn/file/2254a3d75fdc75522e3d16081cededbd_tn',
-                    name: 'Mỹ phẩm hạng a a a a ',
-                    price: '100.000 đ',
-                  ),
-                  CardItem(
-                    urlImage:
-                        'https://cf.shopee.vn/file/2254a3d75fdc75522e3d16081cededbd_tn',
-                    name: 'Mỹ phẩm',
-                    price: '100.000 đ',
-                  ),
-                  CardItem(
-                    urlImage:
-                        'https://cf.shopee.vn/file/2254a3d75fdc75522e3d16081cededbd_tn',
-                    name: 'Mỹ phẩm',
-                    price: '100.000 đ',
-                  ),
-                  CardItem(
-                    urlImage:
-                        'https://cf.shopee.vn/file/2254a3d75fdc75522e3d16081cededbd_tn',
-                    name: 'Mỹ phẩm',
-                    price: '100.000 đ',
-                  ),
-                  CardItem(
-                    urlImage:
-                        'https://cf.shopee.vn/file/2254a3d75fdc75522e3d16081cededbd_tn',
-                    name: 'Mỹ phẩm',
-                    price: '100.000 đ',
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class ListControlItem extends StatelessWidget {
-  List<Item> items = [
-    Item(
-      image: 'images/meal.png',
-      des: 'Ăn uống',
-    ),
-    Item(
-      image: 'images/shopping-cart.png',
-      des: 'Đi chợ',
-    ),
-    Item(
-      image: 'images/meal.png',
-      des: 'Ăn uống',
-    ),
-    Item(
-      image: 'images/shopping-cart.png',
-      des: 'Đi chợ',
-    ),
-    Item(
-      image: 'images/meal.png',
-      des: 'Ăn uống',
-    ),
-    Item(
-      image: 'images/shopping-cart.png',
-      des: 'Đi chợ',
-    ),
-    Item(
-      image: 'images/meal.png',
-      des: 'Ăn uống',
-    ),
-    Item(
-      image: 'images/shopping-cart.png',
-      des: 'Đi chợ',
-    ),
-    Item(
-      image: 'images/meal.png',
-      des: 'Ăn uống',
-    ),
-    Item(
-      image: 'images/shopping-cart.png',
-      des: 'Đi chợ',
-    ),
-    Item(
-      image: 'images/meal.png',
-      des: 'Ăn uống',
-    ),
-    Item(
-      image: 'images/shopping-cart.png',
-      des: 'Đi chợ',
-    ),
-    Item(
-      image: 'images/meal.png',
-      des: 'Ăn uống',
-    ),
-    Item(
-      image: 'images/shopping-cart.png',
-      des: 'Đi chợ',
-    ),
-    Item(
-      image: 'images/meal.png',
-      des: 'Ăn uống',
-    ),
-    Item(
-      image: 'images/shopping-cart.png',
-      des: 'Đi chợ',
-    ),
-    Item(
-      image: 'images/meal.png',
-      des: 'Ăn uống',
-    ),
-    Item(
-      image: 'images/shopping-cart.png',
-      des: 'Đi chợ',
-    ),
-    Item(
-      image: 'images/meal.png',
-      des: 'Ăn uống',
-    ),
-    Item(
-      image: 'images/shopping-cart.png',
-      des: 'Đi chợ',
-    ),
-    Item(
-      image: 'images/meal.png',
-      des: 'Ăn uống',
-    ),
-    Item(
-      image: 'images/shopping-cart.png',
-      des: 'Đi chợ',
-    ),
-    Item(
-      image: 'images/meal.png',
-      des: 'Ăn uống',
-    ),
-    Item(
-      image: 'images/shopping-cart.png',
-      des: 'Đi chợ',
-    ),
-    Item(
-      image: 'images/meal.png',
-      des: 'Ăn uống',
-    ),
-    Item(
-      image: 'images/shopping-cart.png',
-      des: 'Đi chợ',
-    ),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10),
-      child: Container(
-        height: MediaQuery.of(context).size.height * 0.2,
-        child: GridView.count(
-          scrollDirection: Axis.horizontal,
-          crossAxisCount: 2,
-          children: List.generate(
-            items.length,
-            (index) => Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.asset(
-                  items[index].image,
-                  height: 30,
-                  width: 30,
-                ),
-                Text(items[index].des),
-              ],
-            ),
-          ),
-          mainAxisSpacing: 5,
-          crossAxisSpacing: 10,
-        ),
-      ),
-    );
-  }
-}
-
-class Discount extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.4,
-      child: Padding(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          children: [
-            Container(
-              alignment: Alignment.topLeft,
-              height: MediaQuery.of(context).size.height * 0.4 * 0.2 - 20,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                children: [
-                  Text(
-                    'Discount/Save',
-                    style: TextStyle(
-                      color: Colors.orange,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    'Xem Thêm >',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 10,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  CardItem(
-                    urlImage:
-                        'https://cf.shopee.vn/file/2254a3d75fdc75522e3d16081cededbd_tn',
-                    name: 'Mỹ phẩm',
-                    price: '100.000 đ',
-                  ),
-                  CardItem(
-                    urlImage:
-                        'https://cf.shopee.vn/file/2254a3d75fdc75522e3d16081cededbd_tn',
-                    name: 'Mỹ phẩm',
-                    price: '100.000 đ',
-                  ),
-                  CardItem(
-                    urlImage:
-                        'https://cf.shopee.vn/file/2254a3d75fdc75522e3d16081cededbd_tn',
-                    name: 'Mỹ phẩm',
-                    price: '100.000 đ',
-                  ),
-                  CardItem(
-                    urlImage:
-                        'https://cf.shopee.vn/file/2254a3d75fdc75522e3d16081cededbd_tn',
-                    name: 'Mỹ phẩm',
-                    price: '100.000 đ',
-                  ),
-                  CardItem(
-                    urlImage:
-                        'https://cf.shopee.vn/file/2254a3d75fdc75522e3d16081cededbd_tn',
-                    name: 'Mỹ phẩm',
-                    price: '100.000 đ',
-                  ),
-                  CardItem(
-                    urlImage:
-                        'https://cf.shopee.vn/file/2254a3d75fdc75522e3d16081cededbd_tn',
-                    name: 'Mỹ phẩm',
-                    price: '100.000 đ',
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class Trending extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          children: [
-            Container(
-              alignment: Alignment.topLeft,
-              child: Text(
-                'Xu hướng tìm kiếm',
-                style: TextStyle(
-                  color: Colors.orange,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  CardItemNonPrice(
-                    urlImage:
-                        'https://cf.shopee.vn/file/2254a3d75fdc75522e3d16081cededbd_tn',
-                    name: 'Mỹ Phẩm',
-                  ),
-                  CardItemNonPrice(
-                    urlImage:
-                        'https://cf.shopee.vn/file/2254a3d75fdc75522e3d16081cededbd_tn',
-                    name: 'Mỹ Phẩm',
-                  ),
-                  CardItemNonPrice(
-                    urlImage:
-                        'https://cf.shopee.vn/file/2254a3d75fdc75522e3d16081cededbd_tn',
-                    name: 'Mỹ Phẩm',
-                  ),
-                  CardItemNonPrice(
-                    urlImage:
-                        'https://cf.shopee.vn/file/2254a3d75fdc75522e3d16081cededbd_tn',
-                    name: 'Mỹ Phẩm',
-                  ),
-                  CardItemNonPrice(
-                    urlImage:
-                        'https://cf.shopee.vn/file/2254a3d75fdc75522e3d16081cededbd_tn',
-                    name: 'Mỹ Phẩm',
-                  ),
-                  CardItemNonPrice(
-                    urlImage:
-                        'https://cf.shopee.vn/file/2254a3d75fdc75522e3d16081cededbd_tn',
-                    name: 'Mỹ Phẩm',
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
 
 class MainScreen extends StatefulWidget {
   static const String route = '/mainscreen';
@@ -410,114 +18,150 @@ class Page1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: 100,
-              child: Stack(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(80),
-                      bottomRight: Radius.circular(80),
-                    ),
-                    child: Container(
-                      height: 50,
-                      color: Colors.deepPurpleAccent,
-                    ),
+      child: ListView(
+        shrinkWrap: true,
+        children: [
+          Container(
+            height: 100,
+            child: Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(80),
+                    bottomRight: Radius.circular(80),
                   ),
-                  Positioned(
-                    bottom: 0,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 40),
-                      child: Container(
-                        width: 300,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          color: Colors.orange,
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(Icons.search),
-                                  Text('Nạp tiền'),
-                                ],
-                              ),
+                  child: Container(
+                    height: 50,
+                    color: Colors.deepPurpleAccent,
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                    child: Container(
+                      width: 300,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: Colors.orange,
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'images/Group_8113.png',
+                                  height: 30.0,
+                                ),
+                                SizedBox(
+                                  height: 5.0,
+                                ),
+                                Text(
+                                  'Nạp tiền',
+                                  style: TextStyle(fontSize: 10.0),
+                                ),
+                              ],
                             ),
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(Icons.search),
-                                  Text('Nạp tiền'),
-                                ],
-                              ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'images/Group_535.png',
+                                  height: 30.0,
+                                ),
+                                SizedBox(
+                                  height: 5.0,
+                                ),
+                                Text(
+                                  'Chuyển V',
+                                  style: TextStyle(fontSize: 10.0),
+                                ),
+                              ],
                             ),
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(Icons.search),
-                                  Text('Nạp tiền'),
-                                ],
-                              ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'images/Group_596.png',
+                                  height: 30.0,
+                                ),
+                                SizedBox(
+                                  height: 5.0,
+                                ),
+                                Text(
+                                  'QR-DV',
+                                  style: TextStyle(fontSize: 10.0),
+                                ),
+                              ],
                             ),
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(Icons.search),
-                                  Text('Nạp tiền'),
-                                ],
-                              ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'images/Group.png',
+                                  height: 30.0,
+                                ),
+                                SizedBox(
+                                  height: 5.0,
+                                ),
+                                Text(
+                                  'Mã QR',
+                                  style: TextStyle(fontSize: 10.0),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            Slide(),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Link giới thiệu',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.orange,
-                      fontWeight: FontWeight.w600,
-                    ),
+          ),
+          Slide(),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Link giới thiệu',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.orange,
+                    fontWeight: FontWeight.w600,
                   ),
-                  Icon(Icons.search),
-                ],
-              ),
+                ),
+                Icon(Icons.search),
+              ],
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
-              child: Divider(
-                height: 1,
-              ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 10),
+            child: Divider(
+              height: 1,
             ),
-            ListControlItem(),
-            HotItem(),
-            Discount(),
-            Divider(
-              thickness: 5,
-              color: Colors.grey[300],
-            ),
-            Trending(),
-          ],
-        ),
+          ),
+          ProductCategory(),
+          HotItem(),
+          Discount(),
+          Divider(
+            thickness: 5,
+            color: Colors.grey[300],
+          ),
+          KeySearchItem(),
+        ],
       ),
     );
   }
@@ -549,7 +193,16 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    print('intit');
+    productBloc..getProducts(4);
+    productBloc..getProductCat();
+    bannerListBloc..getBanner(4);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    productBloc.dispose();
+    bannerListBloc.dispose();
   }
 
   @override

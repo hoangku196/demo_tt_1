@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import 'package:demo_app/models/models.dart';
 
 abstract class SearchState {}

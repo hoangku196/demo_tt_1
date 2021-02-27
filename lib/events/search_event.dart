@@ -4,14 +4,12 @@ abstract class SearchEvent {}
 
 class ClearSearchEvent extends SearchEvent {}
 
-class SearchAlbumIdEvent extends SearchEvent {
+class SearchProductEvent extends SearchEvent {
   final String value;
-
-  SearchAlbumIdEvent({@required this.value});
+  SearchProductEvent({@required this.value});
 }
 
 class LoadMoreEvent extends SearchEvent {
   final String currentValue;
-
   LoadMoreEvent({@required this.currentValue});
 }

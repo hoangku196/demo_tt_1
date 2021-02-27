@@ -1,4 +1,3 @@
-import 'package:demo_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class OtherScreen extends StatelessWidget {
