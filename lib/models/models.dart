@@ -1,4 +1,3 @@
-export 'photo.dart';
 export 'banner.dart';
 export 'hot_item.dart';
 export 'product_cat.dart';

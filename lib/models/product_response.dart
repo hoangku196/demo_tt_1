@@ -11,6 +11,12 @@ class ProductResponse {
             (json['data'] as List).map((i) => Product.fromJson(i)).toList(),
         error = "";
 
+  ProductResponse.fromJsonByShop(Map<String, dynamic> json)
+      : products = (json['data']['_products'] as List)
+            .map((i) => Product.fromJson(i))
+            .toList(),
+        error = "";
+
   ProductResponse.withError(String errorValue)
       : products = [],
         error = errorValue;

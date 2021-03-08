@@ -7,18 +7,21 @@ class ProductUninitializedState extends SearchState {}
 class ProductFetchingState extends SearchState {}
 
 class ProductFetchedState extends SearchState {
-  final List<ProductResponse> productResponse;
+  final List<Product> products;
   final bool hasReachedMax;
+  final String keyword;
 
-  ProductFetchedState({this.productResponse, this.hasReachedMax});
+  ProductFetchedState({this.products, this.hasReachedMax, this.keyword});
 
   ProductFetchedState copyWith({
-    List<ProductResponse> products,
+    List<Product> products,
     bool hasReachedMax,
+    String keyword,
   }) {
     return ProductFetchedState(
-      productResponse: productResponse ?? this.productResponse,
+      products: products ?? this.products,
       hasReachedMax: hasReachedMax ?? this.hasReachedMax,
+      keyword: keyword ?? this.keyword,
     );
   }
 }

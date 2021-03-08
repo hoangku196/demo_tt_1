@@ -1,48 +1,45 @@
+import 'package:demo_app/models/models.dart';
+import 'package:demo_app/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
+
+import 'package:demo_app/utls/utls.dart';
 
 class CardItem extends StatelessWidget {
-  final String urlImage, name;
-  final double price;
+  final Product product;
 
-  final bool haveImage;
-
-  const CardItem({this.urlImage, this.name, this.price, this.haveImage});
-
-  String formatPrice(double price) {
-    var formatCurrency =
-        NumberFormat.simpleCurrency(locale: 'en_US', decimalDigits: 0);
-    String format = formatCurrency.format(price);
-    return format.substring(1, format.length) + '  đ';
-  }
+  const CardItem({this.product});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 5),
-      child: Card(
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(5),
-          child: Container(
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(context, ProductDetailsScreen.route,
+          arguments: ProductDetailsScreenAgrument(product: product)),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 5),
+        child: Card(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 FutureBuilder(
-                    future: http.get(urlImage),
+                    future: http.get(
+                        'http://devpga.nanoweb.vn/static${product.avatarPath}${product.avatarName}'),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
-                        return Container(
-                          height: 150,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              onError: (exception, stackTrace) =>
-                                  print('Lỗi không có ảnh'),
-                              image: NetworkImage(
-                                urlImage,
+                        return Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                onError: (exception, stackTrace) =>
+                                    print('Lỗi không có ảnh'),
+                                image: NetworkImage(
+                                  'http://devpga.nanoweb.vn/static${product.avatarPath}${product.avatarName}',
+                                ),
+                                fit: BoxFit.cover,
                               ),
-                              fit: BoxFit.cover,
                             ),
                           ),
                         );
@@ -69,7 +66,7 @@ class CardItem extends StatelessWidget {
                     horizontal: 5,
                   ),
                   child: Text(
-                    name,
+                    product.name,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -79,7 +76,7 @@ class CardItem extends StatelessWidget {
                     horizontal: 5,
                   ),
                   child: Text(
-                    formatPrice(price),
+                    formatPrice(product.price),
                     style: TextStyle(
                       color: Colors.red,
                     ),
@@ -96,34 +93,34 @@ class CardItem extends StatelessWidget {
                         children: [
                           Icon(
                             Icons.favorite,
-                            size: 10,
+                            size: 15,
                             color: Colors.orange,
                           ),
                           Icon(
                             Icons.favorite,
-                            size: 10,
+                            size: 15,
                             color: Colors.orange,
                           ),
                           Icon(
                             Icons.favorite,
-                            size: 10,
+                            size: 15,
                             color: Colors.orange,
                           ),
                           Icon(
                             Icons.favorite,
-                            size: 10,
+                            size: 15,
                             color: Colors.orange,
                           ),
                           Icon(
                             Icons.favorite,
-                            size: 10,
+                            size: 15,
                             color: Colors.orange,
                           ),
                         ],
                       ),
                       Icon(
                         Icons.shopping_cart,
-                        size: 10,
+                        size: 15,
                         color: Colors.orange,
                       ),
                     ],

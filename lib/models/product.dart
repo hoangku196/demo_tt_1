@@ -22,12 +22,12 @@ class Product {
   String viewed;
   String createdAt;
   String updatedAt;
-  Null shortDescription;
+  String shortDescription;
   String description;
   String metaTitle;
   String metaDescription;
   String metaKeywords;
-  Null dynamicField;
+  String dynamicField;
   String cusField1;
   String shopId;
   String statusQuantity;
@@ -44,7 +44,7 @@ class Product {
   String width;
   String type;
   String startTime;
-  Null numberTime;
+  String numberTime;
   String feeShip;
   String noteFeeShip;
   String videos;

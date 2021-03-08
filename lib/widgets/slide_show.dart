@@ -6,6 +6,8 @@ import 'package:demo_app/models/models.dart' as model;
 import 'main_slide_show.dart';
 
 class Slide extends StatelessWidget {
+  const Slide();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -18,24 +20,46 @@ class Slide extends StatelessWidget {
               if (snapshot.hasData) {
                 if (snapshot.data.error != null &&
                     snapshot.data.error.length > 0) {
-                  return _buildError(snapshot.data.error);
+                  return BuildSlideError(error: snapshot.data.error);
                 }
-                return _buildSlideShow(snapshot.data);
+                return BuildSlideShow(data: snapshot.data);
               } else if (snapshot.hasError) {
-                return _buildError(snapshot.error);
+                return BuildSlideError(error: snapshot.error);
               } else {
-                return buildLoading();
+                return BuildSlideLoading();
               }
             }),
       ),
     );
   }
+}
 
-  Widget _buildError(String error) => Center(
-        child: Text('Error occured: $error'),
-      );
+class BuildSlideShow extends StatelessWidget {
+  const BuildSlideShow({
+    Key key,
+    @required this.data,
+  }) : super(key: key);
 
-  Widget buildLoading() => Center(
+  final model.BannerResponse data;
+
+  @override
+  Widget build(BuildContext context) {
+    List<model.Banner> banners = data.banners;
+    List<Widget> widgets = [];
+    for (int i = 0; i < banners.length; i++) {
+      widgets.add(BuildImageSlide(urlImage: banners[i].src));
+    }
+    return MainSlideShow(widgets: widgets);
+  }
+}
+
+class BuildSlideLoading extends StatelessWidget {
+  const BuildSlideLoading({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => Center(
         child: SizedBox(
           height: 25,
           width: 25,
@@ -45,15 +69,20 @@ class Slide extends StatelessWidget {
           ),
         ),
       );
+}
 
-  Widget _buildSlideShow(model.BannerResponse data) {
-    List<model.Banner> banners = data.banners;
-    List<Widget> widgets = [];
-    for (int i = 0; i < banners.length; i++) {
-      widgets.add(BuildImageSlide(urlImage: banners[i].src));
-    }
-    return MainSlideShow(widgets: widgets);
-  }
+class BuildSlideError extends StatelessWidget {
+  const BuildSlideError({
+    Key key,
+    @required this.error,
+  }) : super(key: key);
+
+  final String error;
+
+  @override
+  Widget build(BuildContext context) => Center(
+        child: Text('Error occured: $error'),
+      );
 }
 
 class BuildImageSlide extends StatelessWidget {

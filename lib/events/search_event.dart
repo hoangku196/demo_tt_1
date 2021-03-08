@@ -9,7 +9,4 @@ class SearchProductEvent extends SearchEvent {
   SearchProductEvent({@required this.value});
 }
 
-class LoadMoreEvent extends SearchEvent {
-  final String currentValue;
-  LoadMoreEvent({@required this.currentValue});
-}
+class LoadMoreEvent extends SearchEvent {}

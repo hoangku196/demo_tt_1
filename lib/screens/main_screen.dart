@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/painting.dart';
 import 'package:demo_app/widgets/widgets.dart';
+import 'package:flutter/services.dart';
 
 class MainScreen extends StatefulWidget {
   static const String route = '/mainscreen';
@@ -13,13 +14,12 @@ class MainScreen extends StatefulWidget {
 }
 
 class Page1 extends StatelessWidget {
-  Page1({Key key}) : super(key: key);
+  const Page1({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ListView(
-        shrinkWrap: true,
+    return SingleChildScrollView(
+      child: Column(
         children: [
           Container(
             height: 100,
@@ -37,10 +37,11 @@ class Page1 extends StatelessWidget {
                 ),
                 Positioned(
                   bottom: 0,
+                  left: 0,
+                  right: 0,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 40),
                     child: Container(
-                      width: 300,
                       height: 100,
                       decoration: BoxDecoration(
                         color: Colors.orange,
@@ -55,14 +56,14 @@ class Page1 extends StatelessWidget {
                               children: [
                                 Image.asset(
                                   'images/Group_8113.png',
-                                  height: 30.0,
+                                  height: 50,
                                 ),
                                 SizedBox(
                                   height: 5.0,
                                 ),
                                 Text(
                                   'Nạp tiền',
-                                  style: TextStyle(fontSize: 10.0),
+                                  style: TextStyle(fontSize: 15.0),
                                 ),
                               ],
                             ),
@@ -73,14 +74,14 @@ class Page1 extends StatelessWidget {
                               children: [
                                 Image.asset(
                                   'images/Group_535.png',
-                                  height: 30.0,
+                                  height: 50.0,
                                 ),
                                 SizedBox(
                                   height: 5.0,
                                 ),
                                 Text(
                                   'Chuyển V',
-                                  style: TextStyle(fontSize: 10.0),
+                                  style: TextStyle(fontSize: 15.0),
                                 ),
                               ],
                             ),
@@ -91,14 +92,14 @@ class Page1 extends StatelessWidget {
                               children: [
                                 Image.asset(
                                   'images/Group_596.png',
-                                  height: 30.0,
+                                  height: 50.0,
                                 ),
                                 SizedBox(
                                   height: 5.0,
                                 ),
                                 Text(
                                   'QR-DV',
-                                  style: TextStyle(fontSize: 10.0),
+                                  style: TextStyle(fontSize: 15.0),
                                 ),
                               ],
                             ),
@@ -109,14 +110,14 @@ class Page1 extends StatelessWidget {
                               children: [
                                 Image.asset(
                                   'images/Group.png',
-                                  height: 30.0,
+                                  height: 50.0,
                                 ),
                                 SizedBox(
                                   height: 5.0,
                                 ),
                                 Text(
                                   'Mã QR',
-                                  style: TextStyle(fontSize: 10.0),
+                                  style: TextStyle(fontSize: 15.0),
                                 ),
                               ],
                             ),
@@ -186,15 +187,16 @@ class _MainScreenState extends State<MainScreen> {
     ),
   ];
 
-  final PageStorageBucket _bucket = PageStorageBucket();
+  // final PageStorageBucket _bucket = PageStorageBucket();
 
-  var currentPage = 0;
+  var _currentPage = 0;
 
   @override
   void initState() {
     super.initState();
-    productBloc..getProducts(4);
-    productBloc..getProductCat();
+    productBloc
+      ..getProducts(4)
+      ..getProductCat();
     bannerListBloc..getBanner(4);
   }
 
@@ -203,10 +205,15 @@ class _MainScreenState extends State<MainScreen> {
     super.dispose();
     productBloc.dispose();
     bannerListBloc.dispose();
+    shoppingCartBloc.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+
     print('build');
     return Scaffold(
       appBar: MainAppBar(
@@ -224,81 +231,16 @@ class _MainScreenState extends State<MainScreen> {
       ),
       body: IndexedStack(
         children: pages,
-        index: currentPage,
+        index: _currentPage,
       ),
-      bottomNavigationBar: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-        height: 40,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            GestureDetector(
-              onTap: () {
-                setState(() {
-                  currentPage = 0;
-                });
-              },
-              child: buildColumn(0),
-            ),
-            GestureDetector(
-              onTap: () {
-                setState(() {
-                  currentPage = 1;
-                });
-              },
-              child: buildColumn(1),
-            ),
-            GestureDetector(
-              onTap: () {
-                setState(() {
-                  currentPage = 2;
-                });
-              },
-              child: Icon(
-                Icons.home,
-                size: 40,
-                color: currentPage == 2 ? Colors.blue : Colors.black,
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                setState(() {
-                  currentPage = 3;
-                });
-              },
-              child: buildColumn(3),
-            ),
-            GestureDetector(
-              onTap: () {
-                setState(() {
-                  currentPage = 4;
-                });
-              },
-              child: buildColumn(4),
-            ),
-          ],
-        ),
+      bottomNavigationBar: BottomNavBar(
+        defaultSelectedIndex: 0,
+        onChange: (val) {
+          setState(() {
+            _currentPage = val;
+          });
+        },
       ),
-    );
-  }
-
-  Column buildColumn(int index) {
-    return Column(
-      children: [
-        Expanded(
-          child: Icon(
-            Icons.home,
-            color: index == currentPage ? Colors.blue : Colors.black,
-          ),
-        ),
-        Text(
-          'Page 1',
-          style: TextStyle(
-            fontSize: 10,
-            color: index == currentPage ? Colors.blue : Colors.black,
-          ),
-        ),
-      ],
     );
   }
 }

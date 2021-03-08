@@ -16,6 +16,8 @@ class AppRepository {
   final String _getProducts = "/app/product/get-products";
   final String _getBannerSlide = "/app/home/get-banner";
   final String _getKeySearch = "/app/home/get-key-search-product";
+  final String _getDetailProduct = "/app/product/data-page-detail-product";
+  final String _getProductsByShop = "/app/product/data-page-detail-shop";
 
   //Get
   final String _getProductCatShowHome = "/app/home/get-productcat-showhome";
@@ -54,6 +56,45 @@ class AppRepository {
     }
   }
 
+  Future<ProductResponse> getDetailsProduct(String productId) async {
+    try {
+      final response = await http.post(
+        '$mainUrl$_getDetailProduct',
+        headers: {
+          'token': _appToken,
+        },
+        body: jsonEncode({
+          'product_id': '$productId',
+        }),
+      );
+
+      return ProductResponse.fromJson(json.decode(response.body));
+    } catch (error, stackTrace) {
+      print('Exception occured: $error stackTrace: $stackTrace');
+      return ProductResponse.withError(error);
+    }
+  }
+
+  Future<ProductResponse> getProductsByShop(String shopId) async {
+    try {
+      final response = await http.post(
+        '$mainUrl$_getProductsByShop',
+        headers: {
+          'token': _appToken,
+        },
+        body: json.encode({
+          'shop_id': shopId,
+          '_products': 1,
+        }),
+      );
+
+      return ProductResponse.fromJsonByShop(json.decode(response.body));
+    } catch (error, stackTrace) {
+      print('Exception occured: $error stackTrace: $stackTrace');
+      return ProductResponse.withError(error);
+    }
+  }
+
   Future<ProductResponse> getProductsByKeyword(String keyword) async {
     try {
       final response = await http.post(
@@ -81,6 +122,7 @@ class AppRepository {
           'token': _appToken,
         },
       );
+
       return ProductCatResponse.fromJson(json.decode(response.body));
     } catch (error, stackTrace) {
       print('Exception occured: $error stackTrace: $stackTrace');

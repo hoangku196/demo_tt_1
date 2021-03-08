@@ -4,7 +4,12 @@ import 'package:demo_app/widgets/card_item.dart';
 import 'package:demo_app/models/models.dart' as model;
 import 'package:demo_app/bloc/bloc.dart';
 
-class HotItem extends StatelessWidget {
+class HotItem extends StatefulWidget {
+  @override
+  _HotItemState createState() => _HotItemState();
+}
+
+class _HotItemState extends State<HotItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,7 +31,7 @@ class HotItem extends StatelessWidget {
               ),
             ),
             Container(
-              height: MediaQuery.of(context).size.height * 0.4,
+              height: MediaQuery.of(context).size.height * 0.3,
               child: StreamBuilder<model.ProductResponse>(
                 stream: productBloc.product.stream,
                 builder:
@@ -70,15 +75,13 @@ class HotItem extends StatelessWidget {
     List<model.Product> products = data.products;
     return GridView.count(
       scrollDirection: Axis.horizontal,
+      addAutomaticKeepAlives: true,
       crossAxisCount: 1,
       childAspectRatio: 1.5,
       children: List.generate(
         products.length,
         (index) => CardItem(
-          urlImage:
-              'http://devpga.nanoweb.vn/static${products[index].avatarPath}${products[index].avatarName}',
-          name: products[index].name,
-          price: products[index].price.toDouble(),
+          product: products[index],
         ),
       ),
       mainAxisSpacing: 5,

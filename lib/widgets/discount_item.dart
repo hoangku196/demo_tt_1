@@ -4,7 +4,12 @@ import 'package:demo_app/models/models.dart' as model;
 import 'package:demo_app/widgets/card_item.dart';
 import 'package:demo_app/bloc/bloc.dart';
 
-class Discount extends StatelessWidget {
+class Discount extends StatefulWidget {
+  @override
+  _DiscountState createState() => _DiscountState();
+}
+
+class _DiscountState extends State<Discount> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,25 +42,21 @@ class Discount extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            height: MediaQuery.of(context).size.height * 0.8,
-            child: StreamBuilder<model.ProductResponse>(
-              stream: productBloc.product.stream,
-              builder:
-                  (context, AsyncSnapshot<model.ProductResponse> snapshot) {
-                if (snapshot.hasData) {
-                  if (snapshot.data.error != null &&
-                      snapshot.data.error.length > 0) {
-                    return _buildError(snapshot.data.error);
-                  }
-                  return _buildHotItemCard(snapshot.data);
-                } else if (snapshot.hasError) {
-                  return _buildError(snapshot.error);
-                } else {
-                  return buildLoading();
+          StreamBuilder<model.ProductResponse>(
+            stream: productBloc.product.stream,
+            builder: (context, AsyncSnapshot<model.ProductResponse> snapshot) {
+              if (snapshot.hasData) {
+                if (snapshot.data.error != null &&
+                    snapshot.data.error.length > 0) {
+                  return _buildError(snapshot.data.error);
                 }
-              },
-            ),
+                return _buildHotItemCard(snapshot.data);
+              } else if (snapshot.hasError) {
+                return _buildError(snapshot.error);
+              } else {
+                return buildLoading();
+              }
+            },
           ),
         ],
       ),
@@ -85,14 +86,12 @@ class Discount extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
       scrollDirection: Axis.vertical,
       crossAxisCount: 2,
-      childAspectRatio: 0.8,
       children: List.generate(
         products.length,
-        (index) => CardItem(
-          urlImage:
-              'http://devpga.nanoweb.vn/static${products[index].avatarPath}${products[index].avatarName}',
-          name: products[index].name,
-          price: products[index].price.toDouble(),
+        (index) => Container(
+          child: CardItem(
+            product: products[index],
+          ),
         ),
       ),
       mainAxisSpacing: 10,

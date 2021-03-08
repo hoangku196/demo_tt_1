@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class CardItemNonPrice extends StatelessWidget {
-  final String urlImage, name;
+import 'package:demo_app/models/models.dart';
 
-  const CardItemNonPrice({this.urlImage, this.name});
+class CardItemNonPrice extends StatelessWidget {
+  final Product product;
+  final double height;
+
+  const CardItemNonPrice({this.product, this.height});
 
   @override
   Widget build(BuildContext context) {
@@ -14,38 +17,30 @@ class CardItemNonPrice extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(5),
           child: Container(
+            height: height * 0.8,
             width: MediaQuery.of(context).size.width * 0.35,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 FutureBuilder(
-                    future: http.get(urlImage),
+                    future: http.get(
+                        'http://devpga.nanoweb.vn/static${product.avatarPath}${product.avatarName}'),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         return Container(
-                          height: 150,
+                          height: height * 0.6,
                           decoration: BoxDecoration(
                             image: DecorationImage(
                               onError: (exception, stackTrace) =>
                                   print('Lỗi không có ảnh'),
-                              image: NetworkImage(urlImage),
+                              image: NetworkImage(
+                                'http://devpga.nanoweb.vn/static${product.avatarPath}${product.avatarName}',
+                              ),
                               fit: BoxFit.cover,
                             ),
                           ),
                         );
-                      } else if (snapshot.hasError)
-                        return Container(
-                          width: 200,
-                          height: 200,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage('images/user_icon.png'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        );
-                      else
+                      } else
                         return SizedBox(
                           width: 30,
                           height: 30,
@@ -58,7 +53,10 @@ class CardItemNonPrice extends StatelessWidget {
                     vertical: 10,
                   ),
                   child: Text(
-                    name,
+                    product.name,
+                    style: TextStyle(
+                      fontSize: 15.0,
+                    ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
